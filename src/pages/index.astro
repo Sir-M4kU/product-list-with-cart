@@ -1,11 +1,30 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Products } from "../components/products";
+import { Cart } from "../components/cart";
+import { Filter } from "../components/filter";
+
+const products = await getCollection("products").then(collection => collection.map(product => product.data));
 ---
 
 <Layout>
-	<Welcome />
+  <main class="p-[22px] lg:mx-auto lg:max-w-[1220px] lg:py-[88px]">
+    <section class="grid gap-8 lg:flex">
+      <section class="flex-grow space-y-[40px] lg:space-y-10">
+        <section class="flex flex-col gap-4 md:flex-row md:justify-between">
+          <h1 class="text-4xl font-bold text-antique-rose-900 lg:text-5xl">Desserts</h1>
+
+          <Filter client:load />
+        </section>
+
+        <section class="grid gap-y-6 md:grid-cols-3 md:gap-x-6 md:gap-y-9">
+          <Products client:load products={products} />
+        </section>
+      </section>
+
+      <Cart client:load />
+    </section>
+  </main>
 </Layout>
