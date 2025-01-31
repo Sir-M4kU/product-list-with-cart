@@ -80,7 +80,7 @@ export const ConfirmOrder: preact.FunctionComponent<Props> = ({ order }) => {
           </section>
 
           <section class="space-y-4 rounded-lg bg-antique-rose-50 px-6 py-4">
-            <ul class="border-b-2 overflow-y-auto max-h-[40svh] lg:h-fit pb-3">
+            <ul class="border-b-2 overflow-y-auto max-h-[30svh] md:max-h-[40svh] lg:h-fit pb-3">
               {order.map((order) => (
                 <Order key={order.id} {...order} />
               ))}
